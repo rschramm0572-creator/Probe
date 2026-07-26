@@ -85,9 +85,13 @@ dann bleibt der Hinweis für Besucher sichtbar.
 
 ## Änderungen veröffentlichen
 
-Die Seite läuft über GitHub Pages. Sobald du `events.json` auf GitHub im Branch
-`main` änderst und speicherst (Commit), wird die Seite automatisch neu
-veröffentlicht. Das dauert in der Regel unter einer Minute.
+Die Seite läuft über GitHub Pages und ist unter
+<https://rschramm0572-creator.github.io/Probe/> erreichbar.
+
+Sobald du `events.json` auf GitHub änderst und speicherst (Commit), wird die
+Seite automatisch neu veröffentlicht. Darum kümmert sich der Workflow
+`.github/workflows/pages.yml`; der Vorgang dauert in der Regel ein bis zwei
+Minuten. Den Fortschritt siehst du im Reiter „Actions“.
 
 Am bequemsten geht das direkt im Browser:
 
