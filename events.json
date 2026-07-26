@@ -1,0 +1,92 @@
+[
+  {
+    "datum": "2026-03-21",
+    "zeit": "10:00",
+    "titel": "Frühjahrsmarkt auf dem Untermarkt",
+    "kategorie": "Markt",
+    "ort": "Untermarkt, Mühlhausen",
+    "beschreibung": "Regionale Erzeuger, Handwerk und Pflanzen aus der Umgebung. Stände rund um den Untermarkt, dazu Kaffee und Kuchen im Innenhof.",
+    "link": "https://www.muehlhausen.de/"
+  },
+  {
+    "datum": "2026-04-18",
+    "zeit": "19:30",
+    "titel": "Orgelkonzert in Divi Blasii",
+    "kategorie": "Musik",
+    "ort": "Kirche Divi Blasii, Untermarkt",
+    "beschreibung": "Werke von Johann Sebastian Bach an der Orgel seiner Mühlhäuser Wirkungsstätte. Einlass ab 19:00 Uhr.",
+    "link": "https://www.muehlhausen.de/"
+  },
+  {
+    "datum": "2026-05-09",
+    "zeit": "09:00",
+    "titel": "Stadtmauerlauf",
+    "kategorie": "Sport",
+    "ort": "Start: Rabenturm, Historische Wehranlage",
+    "beschreibung": "Volkslauf entlang der historischen Stadtbefestigung. Strecken über 5 km und 10 km, dazu ein Bambinilauf für Kinder.",
+    "link": "https://www.muehlhausen.de/"
+  },
+  {
+    "datum": "2026-06-13",
+    "zeit": "18:00",
+    "titel": "Museumsnacht in den Mühlhäuser Museen",
+    "kategorie": "Kunst",
+    "ort": "Kulturhistorisches Museum, Lindenbühl",
+    "beschreibung": "Alle Häuser bis Mitternacht geöffnet, mit Kurzführungen, Musik im Hof und einem Blick in die Depots.",
+    "link": "https://www.muehlhausen.de/"
+  },
+  {
+    "datum": "2026-07-11",
+    "zeit": "14:00",
+    "titel": "Sommerfest im Schwanenteichpark",
+    "kategorie": "Familie",
+    "ort": "Schwanenteichpark",
+    "beschreibung": "Spielstationen, Bastelangebote und Bühnenprogramm für Familien. Bei Regen fällt das Bühnenprogramm aus.",
+    "link": "https://www.muehlhausen.de/"
+  },
+  {
+    "datum": "2026-08-14",
+    "zeit": "17:00",
+    "titel": "Mühlhäuser Stadtkirmes",
+    "kategorie": "Fest",
+    "ort": "Innenstadt, Blobach",
+    "beschreibung": "Traditionsreiches Stadtfest über drei Tage mit Festumzug, Fahrgeschäften und Livemusik auf mehreren Bühnen.",
+    "link": "https://www.muehlhausen.de/"
+  },
+  {
+    "datum": "2026-09-12",
+    "zeit": "11:00",
+    "titel": "Tag des offenen Denkmals: Führung durch die Wehranlage",
+    "kategorie": "Führung",
+    "ort": "Treffpunkt: Frauentor",
+    "beschreibung": "Rundgang über den begehbaren Teil der Stadtmauer mit Erläuterungen zur Baugeschichte. Dauer etwa 90 Minuten.",
+    "link": "https://www.muehlhausen.de/"
+  },
+  {
+    "datum": "2026-10-03",
+    "zeit": "10:00",
+    "titel": "Herbst- und Töpfermarkt",
+    "kategorie": "Markt",
+    "ort": "Obermarkt",
+    "beschreibung": "Keramik, Korbwaren und Herbstprodukte aus Thüringen. Bis 18:00 Uhr, Eintritt frei.",
+    "link": "https://www.muehlhausen.de/"
+  },
+  {
+    "datum": "2026-11-21",
+    "zeit": "20:00",
+    "titel": "Jazzabend im Theater",
+    "kategorie": "Musik",
+    "ort": "Theater Mühlhausen, Ratsstraße",
+    "beschreibung": "Quartettbesetzung mit Standards und eigenen Arrangements. Kartenvorverkauf an der Theaterkasse.",
+    "link": "https://www.muehlhausen.de/"
+  },
+  {
+    "datum": "2026-12-05",
+    "zeit": "12:00",
+    "titel": "Mühlhäuser Weihnachtsmarkt",
+    "kategorie": "Fest",
+    "ort": "Untermarkt und Steinweg",
+    "beschreibung": "Weihnachtsmarkt in der Altstadt mit Bühnenprogramm, Handwerkerstand und Krippenausstellung. Bis zum 23. Dezember täglich geöffnet.",
+    "link": "https://www.muehlhausen.de/"
+  }
+]

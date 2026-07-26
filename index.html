@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Veranstaltungskalender Mühlhausen 2026</title>
+<meta name="description" content="Veranstaltungskalender für Mühlhausen in Thüringen im Jahr 2026.">
+<style>
+  :root {
+    --bg: #f6f5f2;
+    --surface: #ffffff;
+    --surface-muted: #efede8;
+    --text: #2c3134;
+    --text-muted: #6b7378;
+    --border: #e2ded6;
+    --accent: #4d6b6d;
+    --accent-soft: #e6eded;
+    --shadow: 0 1px 2px rgba(44, 49, 52, .06), 0 4px 12px rgba(44, 49, 52, .04);
+    --radius: 12px;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #1b1e20;
+      --surface: #24282a;
+      --surface-muted: #2c3134;
+      --text: #e3e1dc;
+      --text-muted: #9aa1a5;
+      --border: #363b3e;
+      --accent: #8fb3b2;
+      --accent-soft: #2b3739;
+      --shadow: 0 1px 2px rgba(0, 0, 0, .25);
+    }
+  }
+
+  * { box-sizing: border-box; }
+
+  html { -webkit-text-size-adjust: 100%; }
+
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.55;
+  }
+
+  .wrap {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 20px 16px 64px;
+  }
+
+  header h1 {
+    font-size: 1.5rem;
+    line-height: 1.25;
+    margin: 0 0 4px;
+    font-weight: 600;
+    letter-spacing: -.01em;
+  }
+
+  header p.sub {
+    margin: 0 0 20px;
+    color: var(--text-muted);
+    font-size: .95rem;
+  }
+
+  /* ---------- Filterleiste ---------- */
+
+  .controls {
+    position: sticky;
+    top: 0;
+    z-index: 5;
+    background: var(--bg);
+    padding: 8px 0 10px;
+    margin-bottom: 8px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .search-row { position: relative; }
+
+  #suche {
+    width: 100%;
+    padding: 12px 40px 12px 14px;
+    font: inherit;
+    font-size: 1rem;
+    color: var(--text);
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    -webkit-appearance: none;
+  }
+
+  #suche:focus {
+    outline: 2px solid var(--accent);
+    outline-offset: -1px;
+    border-color: var(--accent);
+  }
+
+  #suche-loeschen {
+    position: absolute;
+    top: 50%;
+    right: 6px;
+    transform: translateY(-50%);
+    width: 32px;
+    height: 32px;
+    border: 0;
+    border-radius: 50%;
+    background: transparent;
+    color: var(--text-muted);
+    font-size: 1.1rem;
+    line-height: 1;
+    cursor: pointer;
+  }
+
+  #suche-loeschen[hidden] { display: none; }
+
+  .chips {
+    display: flex;
+    gap: 8px;
+    margin-top: 10px;
+    overflow-x: auto;
+    scrollbar-width: none;
+    padding-bottom: 2px;
+  }
+
+  .chips::-webkit-scrollbar { display: none; }
+
+  .chip {
+    flex: 0 0 auto;
+    padding: 7px 13px;
+    font: inherit;
+    font-size: .875rem;
+    color: var(--text-muted);
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    cursor: pointer;
+    white-space: nowrap;
+  }
+
+  .chip[aria-pressed="true"] {
+    background: var(--accent-soft);
+    border-color: var(--accent);
+    color: var(--accent);
+    font-weight: 600;
+  }
+
+  .options {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-top: 10px;
+    font-size: .85rem;
+    color: var(--text-muted);
+  }
+
+  .options label {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    cursor: pointer;
+  }
+
+  .options input { accent-color: var(--accent); width: 16px; height: 16px; }
+
+  /* ---------- Nächster Termin ---------- */
+
+  #naechster {
+    margin: 18px 0 4px;
+  }
+
+  #naechster[hidden] { display: none; }
+
+  .naechster-label {
+    display: block;
+    font-size: .75rem;
+    letter-spacing: .09em;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+
+  .card--next {
+    border: 1px solid var(--accent);
+    background: var(--accent-soft);
+  }
+
+  /* ---------- Monate & Karten ---------- */
+
+  .monat {
+    margin-top: 28px;
+  }
+
+  .monat h2 {
+    font-size: .8rem;
+    letter-spacing: .09em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    font-weight: 600;
+    margin: 0 0 10px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .card {
+    display: block;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 14px;
+    margin-bottom: 10px;
+  }
+
+  .card--past { opacity: .5; }
+
+  .card-head {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+  }
+
+  .datum {
+    flex: 0 0 52px;
+    text-align: center;
+    padding: 5px 0 6px;
+    border-radius: 9px;
+    background: var(--surface-muted);
+  }
+
+  .card--next .datum { background: var(--surface); }
+
+  .datum .tag {
+    display: block;
+    font-size: 1.3rem;
+    font-weight: 600;
+    line-height: 1.1;
+  }
+
+  .datum .monat-kurz,
+  .datum .wochentag {
+    display: block;
+    font-size: .68rem;
+    text-transform: uppercase;
+    letter-spacing: .05em;
+    color: var(--text-muted);
+  }
+
+  .card-main { flex: 1 1 auto; min-width: 0; }
+
+  .card h3 {
+    margin: 0 0 4px;
+    font-size: 1.05rem;
+    font-weight: 600;
+    line-height: 1.3;
+  }
+
+  .meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 6px 10px;
+    font-size: .82rem;
+    color: var(--text-muted);
+  }
+
+  .kategorie {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+  }
+
+  .kategorie .punkt {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--accent);
+    flex: 0 0 auto;
+  }
+
+  .beschreibung {
+    margin: 10px 0 0;
+    font-size: .92rem;
+    color: var(--text-muted);
+  }
+
+  .card a.link {
+    display: inline-block;
+    margin-top: 10px;
+    font-size: .88rem;
+    color: var(--accent);
+    text-decoration: none;
+    border-bottom: 1px solid currentColor;
+  }
+
+  /* ---------- Status ---------- */
+
+  #status {
+    margin-top: 24px;
+    padding: 20px 16px;
+    text-align: center;
+    color: var(--text-muted);
+    font-size: .92rem;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+  }
+
+  #status[hidden] { display: none; }
+
+  #status code {
+    font-size: .85em;
+    background: var(--surface-muted);
+    padding: 1px 5px;
+    border-radius: 4px;
+  }
+
+  footer {
+    margin-top: 40px;
+    padding-top: 16px;
+    border-top: 1px solid var(--border);
+    font-size: .8rem;
+    color: var(--text-muted);
+    text-align: center;
+  }
+
+  .visually-hidden {
+    position: absolute;
+    width: 1px; height: 1px;
+    margin: -1px; padding: 0;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  @media (min-width: 600px) {
+    .wrap { padding: 32px 24px 80px; }
+    header h1 { font-size: 1.9rem; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <h1>Veranstaltungskalender Mühlhausen 2026</h1>
+    <p class="sub">Termine in Mühlhausen/Thüringen, nach Monaten geordnet.</p>
+  </header>
+
+  <div class="controls">
+    <div class="search-row">
+      <label for="suche" class="visually-hidden">Veranstaltungen durchsuchen</label>
+      <input id="suche" type="search" placeholder="Suchen nach Titel, Ort, Beschreibung …" autocomplete="off">
+      <button id="suche-loeschen" type="button" aria-label="Suche zurücksetzen" hidden>&times;</button>
+    </div>
+
+    <div class="chips" id="kategorien" role="group" aria-label="Nach Kategorie filtern"></div>
+
+    <div class="options">
+      <label>
+        <input type="checkbox" id="vergangene">
+        Vergangene Termine anzeigen
+      </label>
+      <span id="treffer" aria-live="polite"></span>
+    </div>
+  </div>
+
+  <section id="naechster" hidden>
+    <span class="naechster-label" id="naechster-label">Als Nächstes</span>
+    <div id="naechster-karte"></div>
+  </section>
+
+  <main id="liste"></main>
+
+  <p id="status" hidden></p>
+
+  <footer>
+    Termine werden in <code>events.json</code> gepflegt. Angaben ohne Gewähr.
+  </footer>
+
+</div>
+
+<script>
+(function () {
+  "use strict";
+
+  var MONATE = ["Januar", "Februar", "März", "April", "Mai", "Juni",
+                "Juli", "August", "September", "Oktober", "November", "Dezember"];
+  var MONATE_KURZ = ["Jan", "Feb", "Mär", "Apr", "Mai", "Jun",
+                     "Jul", "Aug", "Sep", "Okt", "Nov", "Dez"];
+  var WOCHENTAGE = ["So", "Mo", "Di", "Mi", "Do", "Fr", "Sa"];
+
+  /* Gedeckte Farbtöne für die Kategoriepunkte, der Reihe nach vergeben. */
+  var PALETTE = ["#4d6b6d", "#8a7a5c", "#6b6a86", "#7a8b6a", "#8b6a6a",
+                 "#5c7a8a", "#87735e", "#6f7f7a"];
+
+  var el = {
+    suche: document.getElementById("suche"),
+    sucheLoeschen: document.getElementById("suche-loeschen"),
+    kategorien: document.getElementById("kategorien"),
+    vergangene: document.getElementById("vergangene"),
+    treffer: document.getElementById("treffer"),
+    naechster: document.getElementById("naechster"),
+    naechsterLabel: document.getElementById("naechster-label"),
+    naechsterKarte: document.getElementById("naechster-karte"),
+    liste: document.getElementById("liste"),
+    status: document.getElementById("status")
+  };
+
+  var alleTermine = [];
+  var farbeProKategorie = {};
+  var aktiveKategorie = "";   // "" bedeutet: alle Kategorien
+  var heute = mitternacht(new Date());
+
+  /* ---------- Hilfsfunktionen ---------- */
+
+  function mitternacht(d) {
+    return new Date(d.getFullYear(), d.getMonth(), d.getDate());
+  }
+
+  /* "2026-08-14" bewusst von Hand zerlegen: new Date("…") wird als UTC
+     gelesen und kann je nach Zeitzone einen Tag daneben liegen. */
+  function parseDatum(wert) {
+    if (typeof wert !== "string") return null;
+    var m = wert.trim().match(/^(\d{4})-(\d{2})-(\d{2})/);
+    if (!m) return null;
+    var d = new Date(+m[1], +m[2] - 1, +m[3]);
+    return isNaN(d.getTime()) ? null : d;
+  }
+
+  function tageBis(datum) {
+    return Math.round((datum - heute) / 86400000);
+  }
+
+  function restText(datum) {
+    var t = tageBis(datum);
+    if (t === 0) return "heute";
+    if (t === 1) return "morgen";
+    if (t < 7) return "in " + t + " Tagen";
+    if (t < 14) return "in einer Woche";
+    if (t < 60) return "in " + Math.round(t / 7) + " Wochen";
+    return "in " + Math.round(t / 30) + " Monaten";
+  }
+
+  function textNode(tag, klasse, text) {
+    var n = document.createElement(tag);
+    if (klasse) n.className = klasse;
+    if (text != null) n.textContent = text;
+    return n;
+  }
+
+  /* ---------- Karten aufbauen ---------- */
+
+  function karte(termin, opt) {
+    opt = opt || {};
+    var card = document.createElement("article");
+    card.className = "card" + (opt.next ? " card--next" : "") + (termin.vergangen ? " card--past" : "");
+
+    var head = textNode("div", "card-head");
+
+    var datum = textNode("div", "datum");
+    datum.appendChild(textNode("span", "wochentag", WOCHENTAGE[termin.datum.getDay()]));
+    datum.appendChild(textNode("span", "tag", termin.datum.getDate()));
+    datum.appendChild(textNode("span", "monat-kurz", MONATE_KURZ[termin.datum.getMonth()]));
+    head.appendChild(datum);
+
+    var main = textNode("div", "card-main");
+
+    main.appendChild(textNode("h3", null, termin.titel));
+
+    var meta = textNode("div", "meta");
+    if (termin.kategorie) {
+      var kat = textNode("span", "kategorie");
+      var punkt = textNode("span", "punkt");
+      punkt.style.background = farbeProKategorie[termin.kategorie] || "var(--accent)";
+      kat.appendChild(punkt);
+      kat.appendChild(document.createTextNode(termin.kategorie));
+      meta.appendChild(kat);
+    }
+    if (termin.zeit) meta.appendChild(textNode("span", null, termin.zeit + " Uhr"));
+    if (termin.ort) meta.appendChild(textNode("span", null, termin.ort));
+    if (meta.childNodes.length) main.appendChild(meta);
+
+    if (termin.beschreibung) main.appendChild(textNode("p", "beschreibung", termin.beschreibung));
+
+    if (termin.link) {
+      var a = textNode("a", "link", "Mehr erfahren");
+      a.href = termin.link;
+      a.target = "_blank";
+      a.rel = "noopener noreferrer";
+      main.appendChild(a);
+    }
+
+    head.appendChild(main);
+    card.appendChild(head);
+    return card;
+  }
+
+  /* ---------- Filtern & Rendern ---------- */
+
+  function passt(termin, suchtext) {
+    if (aktiveKategorie && termin.kategorie !== aktiveKategorie) return false;
+    if (!suchtext) return true;
+    return termin.suchIndex.indexOf(suchtext) !== -1;
+  }
+
+  function render() {
+    var suchtext = el.suche.value.trim().toLowerCase();
+    var zeigeVergangene = el.vergangene.checked;
+
+    var treffer = alleTermine.filter(function (t) {
+      if (t.vergangen && !zeigeVergangene) return false;
+      return passt(t, suchtext);
+    });
+
+    /* Nächster anstehender Termin – berücksichtigt die aktuellen Filter. */
+    var naechster = null;
+    for (var i = 0; i < treffer.length; i++) {
+      if (!treffer[i].vergangen) { naechster = treffer[i]; break; }
+    }
+
+    el.naechsterKarte.textContent = "";
+    if (naechster) {
+      el.naechsterLabel.textContent = "Als Nächstes – " + restText(naechster.datum);
+      el.naechsterKarte.appendChild(karte(naechster, { next: true }));
+      el.naechster.hidden = false;
+    } else {
+      el.naechster.hidden = true;
+    }
+
+    el.liste.textContent = "";
+    var aktuellerMonat = null;
+    var container = null;
+
+    /* Der hervorgehobene Termin steht bereits oben und wird hier ausgelassen.
+       Monatsüberschriften entstehen erst beim ersten Termin des Monats, ein
+       dadurch leerer Monat erscheint also gar nicht. */
+    treffer.filter(function (t) { return t !== naechster; }).forEach(function (t) {
+      var schluessel = t.datum.getFullYear() + "-" + t.datum.getMonth();
+      if (schluessel !== aktuellerMonat) {
+        aktuellerMonat = schluessel;
+        container = textNode("section", "monat");
+        container.appendChild(textNode("h2", null,
+          MONATE[t.datum.getMonth()] + " " + t.datum.getFullYear()));
+        el.liste.appendChild(container);
+      }
+      container.appendChild(karte(t));
+    });
+
+    el.treffer.textContent = treffer.length === 1
+      ? "1 Termin"
+      : treffer.length + " Termine";
+
+    if (!treffer.length) {
+      zeigeStatus(alleTermine.length
+        ? "Keine Termine gefunden. Filter oder Suchbegriff anpassen."
+        : "In events.json sind noch keine Termine eingetragen.");
+    } else {
+      el.status.hidden = true;
+    }
+  }
+
+  function zeigeStatus(html) {
+    el.status.innerHTML = html;
+    el.status.hidden = false;
+  }
+
+  /* ---------- Kategorie-Chips ---------- */
+
+  function baueKategorien() {
+    var namen = [];
+    alleTermine.forEach(function (t) {
+      if (t.kategorie && namen.indexOf(t.kategorie) === -1) namen.push(t.kategorie);
+    });
+    namen.sort(function (a, b) { return a.localeCompare(b, "de"); });
+    namen.forEach(function (name, i) {
+      farbeProKategorie[name] = PALETTE[i % PALETTE.length];
+    });
+
+    el.kategorien.textContent = "";
+    [""].concat(namen).forEach(function (name) {
+      var b = document.createElement("button");
+      b.type = "button";
+      b.className = "chip";
+      b.textContent = name || "Alle";
+      b.setAttribute("aria-pressed", String(name === aktiveKategorie));
+      b.addEventListener("click", function () {
+        aktiveKategorie = (aktiveKategorie === name) ? "" : name;
+        Array.prototype.forEach.call(el.kategorien.children, function (chip) {
+          chip.setAttribute("aria-pressed",
+            String((chip.textContent === "Alle" ? "" : chip.textContent) === aktiveKategorie));
+        });
+        render();
+      });
+      el.kategorien.appendChild(b);
+    });
+  }
+
+  /* ---------- Daten laden ---------- */
+
+  function aufbereiten(rohdaten) {
+    return rohdaten
+      .map(function (e) {
+        var d = parseDatum(e.datum);
+        if (!d) {
+          console.warn("Termin ohne gültiges Datum wird übersprungen:", e);
+          return null;
+        }
+        return {
+          datum: d,
+          zeit: e.zeit || "",
+          titel: e.titel || "Ohne Titel",
+          kategorie: e.kategorie || "",
+          ort: e.ort || "",
+          beschreibung: e.beschreibung || "",
+          link: e.link || "",
+          vergangen: d < heute,
+          suchIndex: [e.titel, e.kategorie, e.ort, e.beschreibung]
+            .join(" ").toLowerCase()
+        };
+      })
+      .filter(Boolean)
+      .sort(function (a, b) { return a.datum - b.datum; });
+  }
+
+  function laden() {
+    fetch("events.json", { cache: "no-cache" })
+      .then(function (r) {
+        if (!r.ok) throw new Error("HTTP " + r.status);
+        return r.json();
+      })
+      .then(function (daten) {
+        if (!Array.isArray(daten)) throw new Error("events.json muss eine Liste sein.");
+        alleTermine = aufbereiten(daten);
+        baueKategorien();
+        render();
+      })
+      .catch(function (fehler) {
+        console.error(fehler);
+        if (location.protocol === "file:") {
+          zeigeStatus("<strong>events.json konnte nicht geladen werden.</strong><br>" +
+            "Beim direkten Öffnen der Datei blockiert der Browser das Nachladen. " +
+            "Die Seite über GitHub Pages oder einen lokalen Server aufrufen, z.&nbsp;B. " +
+            "<code>python3 -m http.server</code> im Projektordner.");
+        } else {
+          zeigeStatus("<strong>events.json konnte nicht geladen werden.</strong><br>" +
+            "Bitte prüfen, ob die Datei vorhanden und gültiges JSON ist. (" + fehler.message + ")");
+        }
+      });
+  }
+
+  /* ---------- Ereignisse ---------- */
+
+  var suchTimer = null;
+  el.suche.addEventListener("input", function () {
+    el.sucheLoeschen.hidden = !el.suche.value;
+    clearTimeout(suchTimer);
+    suchTimer = setTimeout(render, 120);
+  });
+
+  el.sucheLoeschen.addEventListener("click", function () {
+    el.suche.value = "";
+    el.sucheLoeschen.hidden = true;
+    render();
+    el.suche.focus();
+  });
+
+  el.vergangene.addEventListener("change", render);
+
+  laden();
+})();
+</script>
+</body>
+</html>
