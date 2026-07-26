@@ -83,15 +83,28 @@ Lösche den kompletten Block von `{` bis `}` samt dem Komma davor oder dahinter.
 Alternativ kannst du ihn stehen lassen und im Titel `(abgesagt)` ergänzen –
 dann bleibt der Hinweis für Besucher sichtbar.
 
+## GitHub Pages einschalten (einmalig)
+
+Damit die Seite im Browser erreichbar ist, muss GitHub Pages einmal von Hand
+eingeschaltet werden – das lässt sich nur mit Besitzerrechten erledigen:
+
+1. Im Repository oben auf **Settings** klicken
+2. Links im Menü auf **Pages**
+3. Unter „Build and deployment“ bei **Source** den Eintrag
+   **Deploy from a branch** wählen
+4. Bei **Branch** den Branch `claude/muehlhausen-event-calendar-5g1yzo`
+   auswählen, als Ordner `/ (root)` stehen lassen
+5. Auf **Save** klicken
+
+Nach ein bis zwei Minuten ist die Seite hier erreichbar:
+
+<https://rschramm0572-creator.github.io/Probe/>
+
 ## Änderungen veröffentlichen
 
-Die Seite läuft über GitHub Pages und ist unter
-<https://rschramm0572-creator.github.io/Probe/> erreichbar.
-
-Sobald du `events.json` auf GitHub änderst und speicherst (Commit), wird die
-Seite automatisch neu veröffentlicht. Darum kümmert sich der Workflow
-`.github/workflows/pages.yml`; der Vorgang dauert in der Regel ein bis zwei
-Minuten. Den Fortschritt siehst du im Reiter „Actions“.
+Sobald Pages eingeschaltet ist, genügt eine Änderung an `events.json` im
+gewählten Branch: GitHub veröffentlicht die Seite dann von selbst neu, in der
+Regel innerhalb von ein bis zwei Minuten.
 
 Am bequemsten geht das direkt im Browser:
 
