@@ -92,8 +92,8 @@ eingeschaltet werden – das lässt sich nur mit Besitzerrechten erledigen:
 2. Links im Menü auf **Pages**
 3. Unter „Build and deployment“ bei **Source** den Eintrag
    **Deploy from a branch** wählen
-4. Bei **Branch** den Branch `claude/muehlhausen-event-calendar-5g1yzo`
-   auswählen, als Ordner `/ (root)` stehen lassen
+4. Bei **Branch** den Branch `main` auswählen, als Ordner `/ (root)` stehen
+   lassen
 5. Auf **Save** klicken
 
 Nach ein bis zwei Minuten ist die Seite hier erreichbar:
@@ -103,12 +103,13 @@ Nach ein bis zwei Minuten ist die Seite hier erreichbar:
 ## Änderungen veröffentlichen
 
 Sobald Pages eingeschaltet ist, genügt eine Änderung an `events.json` im
-gewählten Branch: GitHub veröffentlicht die Seite dann von selbst neu, in der
+Branch `main`: GitHub veröffentlicht die Seite dann von selbst neu, in der
 Regel innerhalb von ein bis zwei Minuten.
 
 Am bequemsten geht das direkt im Browser:
 
-1. In diesem Repository auf `events.json` klicken
+1. In diesem Repository oben links prüfen, dass `main` ausgewählt ist, dann
+   auf `events.json` klicken
 2. Oben rechts auf das Stift-Symbol („Edit this file“)
 3. Termin ergänzen
 4. Unten auf „Commit changes“ klicken
