@@ -258,3 +258,31 @@ describe('Ausbeute und Kategoriezuordnung', () => {
     expect(findeKategorie(null).id).toBe('sonstige');
   });
 });
+
+describe('Sammelbegriffe mit Klammerangabe', () => {
+  it('zieht die konkrete Ölsorte dem Sammelbegriff vor', () => {
+    const z = parseZutatenliste('Weizenmehl, Zucker, Pflanzenöl (Palm), Salz');
+    expect(z[2].ingredientId).toBe('palmoel');
+  });
+
+  it('bleibt beim Sammelbegriff, wenn die Klammer nichts hergibt', () => {
+    const z = parseZutatenliste('Weizenmehl, Pflanzenöl (nicht gehärtet), Salz');
+    expect(z[1].ingredientId).toBe('pflanzenoel');
+  });
+
+  it('verbessert damit den Fettsäureabgleich', () => {
+    const echt: [string, number][] = [
+      ['weizenmehl', 55],
+      ['zucker', 22],
+      ['palmoel', 22],
+      ['salz', 1],
+    ];
+    const deklariert = berechneNaehrwerte(
+      echt.map((e) => e[1]),
+      echt.map((e) => INGREDIENT_BY_ID.get(e[0])!.naehrwerte),
+    );
+    const zutaten = parseZutatenliste('Weizenmehl, Zucker, Pflanzenöl (Palm), Salz');
+    const r = berechneRezeptur({ zutaten, naehrwerte: deklariert, kategorie: keks });
+    expect(Math.abs(r.fit!.abweichungProzent.gesaettigt ?? 99)).toBeLessThan(15);
+  });
+});

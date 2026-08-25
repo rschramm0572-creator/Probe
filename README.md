@@ -138,3 +138,13 @@ Problem nicht auf.
 
 Die zehn mitgelieferten Termine sind Beispieldaten zur Veranschaulichung und
 keine offiziellen Ankündigungen. Bitte durch echte Termine ersetzen.
+
+---
+
+## Weiteres Projekt in diesem Repository
+
+Im Verzeichnis [`kalkulens/`](kalkulens/) liegt **KalkuLens**, eine eigenständige
+Web-App zur foto-basierten Produktkalkulation im Lebensmitteleinzelhandel
+(Rohware → Vollkosten). Sie hat mit dem Veranstaltungskalender nichts zu tun und
+bringt eigene Abhängigkeiten und eine eigene Anleitung mit – siehe
+[`kalkulens/README.md`](kalkulens/README.md).

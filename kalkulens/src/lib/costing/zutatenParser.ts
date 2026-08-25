@@ -149,6 +149,12 @@ function splitTopLevel(text: string): string[] {
 const PROZENT_RE = /(\d{1,3}(?:[.,]\d{1,2})?)\s*%/;
 
 /**
+ * Sammelbegriffe, die auf dem Etikett meist mit einer Klammerangabe stehen
+ * ("Pflanzenöl (Palm)"). Fuer sie wird die Klammer ausgewertet.
+ */
+const GENERISCH = new Set(['pflanzenoel', 'modifizierte_staerke', 'aroma', 'kraeuter', 'lecithin']);
+
+/**
  * Zerlegt einen Zutatenlistentext in strukturierte Eintraege.
  *
  * Erkannt werden: Reihenfolge, QUID-Prozentangaben (vor oder hinter der
@@ -206,6 +212,21 @@ export function parseZutatenliste(text: string): ParsedZutat[] {
       // Bei zusammengesetzten Zutaten ersatzweise ueber die Hauptunterzutat matchen.
       const alt = matcheZutat(unterzutaten[0]);
       if (alt.ingredientId) treffer = { ...alt, konfidenz: alt.konfidenz * 0.8 };
+    } else if (treffer.ingredientId && GENERISCH.has(treffer.ingredientId)) {
+      // "Pflanzenöl (Palm)" trifft zuerst den Sammelbegriff. Die Klammerangabe
+      // benennt aber die konkrete Ware – und die entscheidet ueber Fettsaeure-
+      // muster und Preis. Deshalb wird sie vorgezogen, wenn sie sicher trifft.
+      for (const unter of unterzutaten) {
+        const genauer = matcheZutat(unter);
+        if (
+          genauer.ingredientId &&
+          genauer.ingredientId !== treffer.ingredientId &&
+          genauer.konfidenz >= 0.7
+        ) {
+          treffer = { ingredientId: genauer.ingredientId, konfidenz: genauer.konfidenz * 0.95 };
+          break;
+        }
+      }
     }
 
     zutaten.push({

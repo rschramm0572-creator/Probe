@@ -53,7 +53,7 @@ const ROWS: Row[] = [
   // --- Fette & Oele --------------------------------------------------------
   ['rapsoel', 'Rapsöl', 'fett', [3700, 100, 7, 0, 0, 0, 0, 0], 1.35, 1.9, 0, 100, 'rapsöl|rapsoel|raps'],
   ['sonnenblumenoel', 'Sonnenblumenöl', 'fett', [3700, 100, 11, 0, 0, 0, 0, 0], 1.30, 1.9, 0, 100, 'sonnenblumenöl|sonnenblumenoel'],
-  ['palmoel', 'Palmöl / Palmfett', 'fett', [3700, 100, 49, 0, 0, 0, 0, 0], 1.15, 1.8, 0, 100, 'palmöl|palmfett|palmoel|pflanzenfett|palmkernfett|pflanzliches fett'],
+  ['palmoel', 'Palmöl / Palmfett', 'fett', [3700, 100, 49, 0, 0, 0, 0, 0], 1.15, 1.8, 0, 100, 'palmöl|palmfett|palmoel|pflanzenfett|palmkernfett|pflanzliches fett|palm|palmkern'],
   ['pflanzenoel', 'Pflanzenöl (unspezifiziert)', 'fett', [3700, 100, 20, 0, 0, 0, 0, 0], 1.25, 1.9, 0, 100, 'pflanzenöl|pflanzliches öl|pflanzenoel|speiseöl'],
   ['kokosfett', 'Kokosfett', 'fett', [3700, 100, 87, 0, 0, 0, 0, 0], 1.85, 1.8, 0, 100, 'kokosfett|kokosöl|kokosoel'],
   ['butter', 'Butter', 'fett', [3050, 82, 52, 0.6, 0.6, 0, 0.7, 1.2], 6.20, 1.5, 0, 60, 'butter|süßrahmbutter|sauerrahmbutter'],

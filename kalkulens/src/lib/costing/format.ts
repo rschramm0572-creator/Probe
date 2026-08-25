@@ -68,10 +68,27 @@ export function datumZeit(iso: string | null | undefined): string {
   }).format(d);
 }
 
-/** Liest eine deutsch formatierte Zahl aus einem Eingabefeld. */
+/**
+ * Liest eine Zahl aus einem Eingabefeld.
+ *
+ * Deutsche Notation ist der Normalfall ("1.234,56"), aber im Alltag tippt
+ * jemand auch "3.29". Ohne Komma wird ein Punkt mit ein bis zwei Nachkommastellen
+ * deshalb als Dezimaltrennzeichen gelesen, mit dreien als Tausenderpunkt.
+ */
 export function parseZahl(text: string): number | null {
-  const t = text.trim().replace(/\s|€|%/g, '').replace(/\./g, '').replace(',', '.');
-  if (!t) return null;
+  const roh = text.trim().replace(/[\s€%]/g, '');
+  if (!roh) return null;
+
+  let t: string;
+  if (roh.includes(',')) {
+    // Komma entscheidet: Punkte sind dann Tausendertrennzeichen.
+    t = roh.replace(/\./g, '').replace(',', '.');
+  } else if (/^-?\d+\.\d{1,2}$/.test(roh)) {
+    t = roh;
+  } else {
+    t = roh.replace(/\./g, '');
+  }
+
   const v = Number(t);
   return Number.isFinite(v) ? v : null;
 }
