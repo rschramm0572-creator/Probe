@@ -235,7 +235,8 @@ export function Tornado({ zeilen }: { zeilen: TornadoZeile[] }) {
   const spanne = Math.max(...daten.map((d) => Math.max(Math.abs(d.entlastung), Math.abs(d.belastung))));
 
   return (
-    <div style={{ height: Math.max(160, zeilen.length * 42 + 40) }} className="w-full">
+    <div className="w-full">
+      <div style={{ height: Math.max(160, zeilen.length * 42 + 40) }}>
       <ResponsiveContainer>
         <BarChart
           data={daten}
@@ -283,7 +284,8 @@ export function Tornado({ zeilen }: { zeilen: TornadoZeile[] }) {
           <Bar dataKey="belastung" stackId="t" fill={ROT} radius={[0, 4, 4, 0]} isAnimationActive={false} />
         </BarChart>
       </ResponsiveContainer>
-      <p className="mt-1 flex items-center justify-center gap-4 text-[11px] text-slate-500">
+      </div>
+      <p className="mt-1 flex flex-wrap items-center justify-center gap-x-4 gap-y-1 text-[11px] text-slate-500">
         <span className="flex items-center gap-1.5">
           <span className="h-2.5 w-2.5 rounded-sm" style={{ backgroundColor: BLAU }} /> entlastend
         </span>

@@ -83,7 +83,8 @@ export function ErgebnisSchritt({
           />
         </div>
         <p className="px-4 pb-3 text-[11px] text-slate-500">
-          Auf einen Balken tippen, um die Herleitung zu sehen.
+          Auf einen Balken tippen, um die Herleitung zu sehen. Auf schmalen Displays lässt sich das
+          Diagramm seitlich schieben.
         </p>
       </Karte>
 
