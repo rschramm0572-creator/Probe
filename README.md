@@ -148,3 +148,26 @@ Web-App zur foto-basierten Produktkalkulation im Lebensmitteleinzelhandel
 (Rohware → Vollkosten). Sie hat mit dem Veranstaltungskalender nichts zu tun und
 bringt eigene Abhängigkeiten und eine eigene Anleitung mit – siehe
 [`kalkulens/README.md`](kalkulens/README.md).
+
+Damit dieselbe GitHub-Pages-Einstellung beide Seiten ausliefert, liegt der
+fertige Build von KalkuLens im Ordner `app/`:
+
+| Adresse | Inhalt |
+|---|---|
+| <https://rschramm0572-creator.github.io/Probe/> | Veranstaltungskalender |
+| <https://rschramm0572-creator.github.io/Probe/app/> | KalkuLens |
+
+An den Repository-Einstellungen ändert sich dadurch nichts – es bleibt bei
+„Deploy from a branch“, Branch `main`, Ordner `/ (root)`. Voraussetzung ist nur,
+dass der Branch mit KalkuLens nach `main` übernommen wurde.
+
+Der Ordner `app/` ist **erzeugt und nicht von Hand zu bearbeiten**. Nach einer
+Änderung am Quellcode wird er so aktualisiert:
+
+```bash
+cd kalkulens
+npm install        # nur beim ersten Mal
+npm run build:pages
+```
+
+Danach die Änderung in `app/` mit einchecken und nach `main` bringen.

@@ -1,0 +1,5 @@
+Dieser Ordner ist erzeugt, nicht von Hand geschrieben.
+
+Er enthält den Produktionsbuild von KalkuLens und wird von GitHub Pages
+unter /app/ ausgeliefert. Änderungen gehören in kalkulens/src/ und werden
+mit "npm run build:pages" hierher übertragen.

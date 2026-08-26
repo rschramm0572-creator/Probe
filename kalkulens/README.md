@@ -13,10 +13,20 @@ nicht, die tatsächliche Rezeptur oder Kalkulation eines Herstellers zu kennen.
 
 ```bash
 npm install
-npm run dev          # Entwicklungsserver
+npm run dev          # Entwicklungsserver, danach http://localhost:5173 öffnen
 npm test             # 73 Unit-Tests (Rezepturrückrechnung, Kalkulationsschema, Export)
 npm run build        # Typprüfung und Produktionsbuild nach dist/
+npm run build:pages  # Build und Veröffentlichung nach ../app/ für GitHub Pages
 ```
+
+Vorausgesetzt wird Node 20.19 oder neuer (Vite 8); getestet mit Node 22.
+
+Veröffentlicht wird über GitHub Pages, das dieses Repository direkt aus dem
+Branch `main` ausliefert. `npm run build:pages` legt den fertigen Build im
+Ordner `app/` im Repository-Wurzelverzeichnis ab; nach dem Einchecken nach `main`
+ist die App unter <https://rschramm0572-creator.github.io/Probe/app/> erreichbar.
+Ein Actions-Workflow ist dafür nicht nötig, und an den Pages-Einstellungen ändert
+sich nichts.
 
 Ohne API-Schlüssel lädt der Startbildschirm über **Demodaten laden** zwei
 Beispielprodukte (Markenartikel und Handelsmarke derselben Warengruppe). Damit
